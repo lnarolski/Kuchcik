@@ -30,7 +30,7 @@ namespace Kuchcik
             dataGridView1.Refresh();
             while (reader.Read())
             {
-                dataGridView1.Rows.Add(reader["name"], reader["unit"]);
+                dataGridView1.Rows.Add(reader["id"], reader["name"], reader["unit"]);
             }
             DatabaseControl.DisonnectDB();
         }
@@ -48,6 +48,45 @@ namespace Kuchcik
             {
                 fillDataGrid();
             }));
+        }
+
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            delButton.Enabled = true;
+        }
+
+        private void dataGridView1_RowLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            delButton.Enabled = false;
+        }
+
+        private void delButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Czy na pewno usunąć składnik?\nZOSTANĄ USUNIĘTE RÓWNIEŻ PRZEPISY ZAWIERAJĄCE TEN SKŁADNIK!!!", "Usuń składnik", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
+                string id = row[0].Cells["id"].Value.ToString();
+                
+                DatabaseControl.ConnectDB();
+                string sql = "DELETE FROM ingredients WHERE id = " + id.ToString();
+                SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+                command.ExecuteNonQuery();
+
+                DatabaseControl.DisonnectDB();
+
+                fillDataGrid();
+            }
+        }
+
+        private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            delButton.Enabled = true;
+        }
+
+        private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            delButton.Enabled = false;
         }
     }
 }

@@ -31,6 +31,7 @@
             this.addNewButton = new System.Windows.Forms.Button();
             this.delButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ingredientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ingredientUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -48,23 +49,40 @@
             // 
             // delButton
             // 
+            this.delButton.Enabled = false;
             this.delButton.Location = new System.Drawing.Point(234, 12);
             this.delButton.Name = "delButton";
             this.delButton.Size = new System.Drawing.Size(216, 90);
             this.delButton.TabIndex = 7;
             this.delButton.Text = "Usuń składnik";
             this.delButton.UseVisualStyleBackColor = true;
+            this.delButton.Click += new System.EventHandler(this.delButton_Click);
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
             this.ingredientName,
             this.ingredientUnit});
             this.dataGridView1.Location = new System.Drawing.Point(12, 108);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(776, 330);
             this.dataGridView1.TabIndex = 8;
+            this.dataGridView1.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEnter);
+            this.dataGridView1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellLeave);
+            this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
+            this.dataGridView1.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowLeave);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
             // 
             // ingredientName
             // 
@@ -98,6 +116,7 @@
         private System.Windows.Forms.Button addNewButton;
         private System.Windows.Forms.Button delButton;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn ingredientName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ingredientUnit;
     }

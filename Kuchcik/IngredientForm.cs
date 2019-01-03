@@ -29,6 +29,7 @@ namespace Kuchcik
             string sql = "INSERT INTO ingredients (name, unit) VALUES ('" + ingredientNameTextBox.Text + "', '" + ingredientUnitTextBox.Text + "')";
             SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
             command.ExecuteNonQuery();
+            DatabaseControl.DisonnectDB();
             this.Close();
         }
     }

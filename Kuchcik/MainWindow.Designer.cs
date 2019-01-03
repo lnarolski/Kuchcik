@@ -32,6 +32,7 @@
             this.recipesListButton = new System.Windows.Forms.Button();
             this.runAlgorithmButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +48,7 @@
             this.groceriesButton.TabIndex = 0;
             this.groceriesButton.Text = "Posiadane artykuły";
             this.groceriesButton.UseVisualStyleBackColor = true;
+            this.groceriesButton.Click += new System.EventHandler(this.groceriesButton_Click);
             // 
             // recipesListButton
             // 
@@ -71,6 +73,7 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
             this.Title,
             this.Image,
             this.Time,
@@ -79,6 +82,12 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(765, 330);
             this.dataGridView1.TabIndex = 5;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
             // 
             // Title
             // 
@@ -126,6 +135,7 @@
         private System.Windows.Forms.Button recipesListButton;
         private System.Windows.Forms.Button runAlgorithmButton;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Title;
         private System.Windows.Forms.DataGridViewImageColumn Image;
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;

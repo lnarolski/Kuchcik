@@ -31,6 +31,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.addNewButton = new System.Windows.Forms.Button();
             this.ingredientsButton = new System.Windows.Forms.Button();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +43,7 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
             this.Title,
             this.Image,
             this.Time,
@@ -70,6 +72,12 @@
             this.ingredientsButton.Text = "Lista składników";
             this.ingredientsButton.UseVisualStyleBackColor = true;
             this.ingredientsButton.Click += new System.EventHandler(this.ingredientsButton_Click);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
             // 
             // Title
             // 
@@ -115,6 +123,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button addNewButton;
         private System.Windows.Forms.Button ingredientsButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Title;
         private System.Windows.Forms.DataGridViewImageColumn Image;
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;

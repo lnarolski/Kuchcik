@@ -22,5 +22,10 @@ namespace Kuchcik
             recipesListWindow recipesListWindow = new recipesListWindow();
             recipesListWindow.ShowDialog();
         }
+
+        private void groceriesButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
