@@ -36,15 +36,16 @@ namespace Kuchcik
             }
             else
             {
-                m_dbConnection = new SQLiteConnection("Data Source=db.db;Version=3;");
-                m_dbConnection.Open();
+                if (m_dbConnection == null) {
+                    m_dbConnection = new SQLiteConnection("Data Source=db.db;Version=3;");
+                    m_dbConnection.Open();
+                }
             }
         }
 
         public static void DisonnectDB()
         {
-            if (m_dbConnection != null)
-                m_dbConnection.Close();
+            //m_dbConnection.Close();
         }
     }
 }

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.addNewButton = new System.Windows.Forms.Button();
-            this.ingredientsButton = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Image = new System.Windows.Forms.DataGridViewImageColumn();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Difficulty_level = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addNewButton = new System.Windows.Forms.Button();
+            this.ingredientsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,26 +52,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(765, 330);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // addNewButton
-            // 
-            this.addNewButton.Location = new System.Drawing.Point(23, 12);
-            this.addNewButton.Name = "addNewButton";
-            this.addNewButton.Size = new System.Drawing.Size(216, 90);
-            this.addNewButton.TabIndex = 5;
-            this.addNewButton.Text = "Dodaj przepis";
-            this.addNewButton.UseVisualStyleBackColor = true;
-            this.addNewButton.Click += new System.EventHandler(this.addNewButton_Click);
-            // 
-            // ingredientsButton
-            // 
-            this.ingredientsButton.Location = new System.Drawing.Point(245, 12);
-            this.ingredientsButton.Name = "ingredientsButton";
-            this.ingredientsButton.Size = new System.Drawing.Size(216, 90);
-            this.ingredientsButton.TabIndex = 6;
-            this.ingredientsButton.Text = "Lista składników";
-            this.ingredientsButton.UseVisualStyleBackColor = true;
-            this.ingredientsButton.Click += new System.EventHandler(this.ingredientsButton_Click);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // id
             // 
@@ -102,6 +83,26 @@
             this.Difficulty_level.HeaderText = "Poziom trudności";
             this.Difficulty_level.Name = "Difficulty_level";
             this.Difficulty_level.ReadOnly = true;
+            // 
+            // addNewButton
+            // 
+            this.addNewButton.Location = new System.Drawing.Point(23, 12);
+            this.addNewButton.Name = "addNewButton";
+            this.addNewButton.Size = new System.Drawing.Size(216, 90);
+            this.addNewButton.TabIndex = 5;
+            this.addNewButton.Text = "Dodaj przepis";
+            this.addNewButton.UseVisualStyleBackColor = true;
+            this.addNewButton.Click += new System.EventHandler(this.addNewButton_Click);
+            // 
+            // ingredientsButton
+            // 
+            this.ingredientsButton.Location = new System.Drawing.Point(245, 12);
+            this.ingredientsButton.Name = "ingredientsButton";
+            this.ingredientsButton.Size = new System.Drawing.Size(216, 90);
+            this.ingredientsButton.TabIndex = 6;
+            this.ingredientsButton.Text = "Lista składników";
+            this.ingredientsButton.UseVisualStyleBackColor = true;
+            this.ingredientsButton.Click += new System.EventHandler(this.ingredientsButton_Click);
             // 
             // recipesListWindow
             // 

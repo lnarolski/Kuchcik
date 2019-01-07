@@ -69,8 +69,68 @@ namespace Kuchcik
                 string id = row[0].Cells["id"].Value.ToString();
                 
                 DatabaseControl.ConnectDB();
+
                 string sql = "DELETE FROM ingredients WHERE id = " + id.ToString();
                 SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+                command.ExecuteNonQuery();
+
+                DatabaseControl.DisonnectDB();
+                DatabaseControl.ConnectDB();
+
+                string ColumnNames = "pragma table_info(recipes)";
+                command = new SQLiteCommand(ColumnNames, DatabaseControl.m_dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+                sql = "CREATE TABLE recipes_backup (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "title TEXT NOT NULL, " +
+                    "img TEXT, " +
+                    "time INTEGER NOT NULL, ";
+                for (int i = 0; i < 5; ++i)
+                    reader.Read();
+                sql += reader["name"].ToString() + " INTEGER NOT NULL";
+                reader.Read();
+                do
+                {
+                    if (String.Compare(reader["name"].ToString(), "ingredient_" + id) != 0)
+                    {
+                        sql += ", " + reader["name"].ToString() + " REAL DEFAULT 0.0";
+                    }
+                } while (reader.Read());
+                sql += ")";
+                command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+                command.ExecuteNonQuery();
+
+                DatabaseControl.DisonnectDB();
+                DatabaseControl.ConnectDB();
+
+                command = new SQLiteCommand(ColumnNames, DatabaseControl.m_dbConnection);
+                reader = command.ExecuteReader();
+                sql = "INSERT INTO recipes_backup SELECT ";
+                reader.Read();
+                sql += reader["name"].ToString();
+                reader.Read();
+                do
+                {
+                    if (String.Compare(reader["name"].ToString(), "ingredient_" + id) != 0)
+                    {
+                        sql += ", " + reader["name"].ToString();
+                    }
+                } while (reader.Read());
+                sql += " FROM recipes";
+                command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+                command.ExecuteNonQuery();
+
+                DatabaseControl.DisonnectDB();
+                DatabaseControl.ConnectDB();
+
+                sql = "DROP TABLE recipes";
+                command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+                command.ExecuteNonQuery();
+
+                DatabaseControl.DisonnectDB();
+                DatabaseControl.ConnectDB();
+
+                sql = "ALTER TABLE recipes_backup RENAME TO recipes";
+                command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
 
                 DatabaseControl.DisonnectDB();
