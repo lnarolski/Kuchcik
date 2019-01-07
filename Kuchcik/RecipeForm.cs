@@ -59,7 +59,7 @@ namespace Kuchcik
 
         private void setCellComboBoxItems(DataGridView dataGrid, int rowIndex, int colIndex, Dictionary<string, Ingredient> itemsToAdd)
         {
-            if (rowIndex >= 0 && colIndex >= 0)
+            if (rowIndex >= 0 && colIndex >= 0 && dataGridView1.Rows[rowIndex].Cells[colIndex].Value == null)
             {
                 DataGridViewComboBoxCell dgvcbc = (DataGridViewComboBoxCell)dataGrid.Rows[rowIndex].Cells[colIndex];
                 // You might pass a boolean to determine whether to clear or not.
