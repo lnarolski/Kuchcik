@@ -40,6 +40,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.identifier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IngridientName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.IngridientValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IngridentUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -151,6 +152,7 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.identifier,
             this.IngridientName,
             this.IngridientValue,
             this.IngridentUnit});
@@ -158,6 +160,15 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(382, 251);
             this.dataGridView1.TabIndex = 12;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
+            // 
+            // identifier
+            // 
+            this.identifier.HeaderText = "Id";
+            this.identifier.Name = "identifier";
+            this.identifier.Width = 50;
             // 
             // IngridientName
             // 
@@ -185,6 +196,7 @@
             this.acceptButton.TabIndex = 13;
             this.acceptButton.Text = "OK";
             this.acceptButton.UseVisualStyleBackColor = true;
+            this.acceptButton.Click += new System.EventHandler(this.acceptButton_Click);
             // 
             // cancelButton
             // 
@@ -237,10 +249,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button acceptButton;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn identifier;
         private System.Windows.Forms.DataGridViewComboBoxColumn IngridientName;
         private System.Windows.Forms.DataGridViewTextBoxColumn IngridientValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn IngridentUnit;
-        private System.Windows.Forms.Button acceptButton;
-        private System.Windows.Forms.Button cancelButton;
     }
 }

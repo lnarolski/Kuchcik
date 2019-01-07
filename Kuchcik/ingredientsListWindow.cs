@@ -61,7 +61,7 @@ namespace Kuchcik
 
         private void delButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Czy na pewno usunąć składnik?\nZOSTANĄ USUNIĘTE RÓWNIEŻ PRZEPISY ZAWIERAJĄCE TEN SKŁADNIK!!!", "Usuń składnik", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Czy na pewno usunąć składnik?\nZOSTANĄ USUNIĘTE RÓWNIEŻ PRZEPISY ZAWIERAJĄCE TEN SKŁADNIK ORAZ ELEMENTY Z TWOJEJ LISTY SKŁADNIKÓW!!!", "Usuń składnik", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
@@ -74,6 +74,10 @@ namespace Kuchcik
                 command.ExecuteNonQuery();
 
                 sql = "DELETE FROM recipes WHERE ingredient_" + id + " <> 0.0";
+                command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+                command.ExecuteNonQuery();
+
+                sql = "DELETE FROM my_ingredients WHERE id = " + id;
                 command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
 
@@ -139,6 +143,16 @@ namespace Kuchcik
         private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
             delButton.Enabled = false;
+        }
+
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
+            string id = row[0].Cells["id"].Value.ToString();
+
+            IngredientForm ingredientForm = new IngredientForm(Int32.Parse(id));
+            ingredientForm.FormClosed += new FormClosedEventHandler(updateData);
+            ingredientForm.ShowDialog();
         }
     }
 }
