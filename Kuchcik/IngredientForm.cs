@@ -31,23 +31,19 @@ namespace Kuchcik
             SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
             command.ExecuteNonQuery();
 
-            DatabaseControl.DisonnectDB();
-            DatabaseControl.ConnectDB();
-
+            command.Cancel();
             sql = "SELECT id FROM ingredients WHERE name = '" + ingredientNameTextBox.Text + "'";
             command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
             reader.Read();
             string ingredient_id = reader["id"].ToString();
 
-            DatabaseControl.DisonnectDB();
-            DatabaseControl.ConnectDB();
-
+            command.Cancel();
             sql = "ALTER TABLE recipes ADD COLUMN ingredient_" + ingredient_id + " REAL DEFAULT 0.0";
             command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
             command.ExecuteNonQuery();
-            
-            DatabaseControl.DisonnectDB();
+
+            command.Cancel();
             this.Close();
         }
     }

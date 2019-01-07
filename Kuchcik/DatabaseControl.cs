@@ -38,6 +38,7 @@ namespace Kuchcik
             {
                 if (m_dbConnection == null) {
                     m_dbConnection = new SQLiteConnection("Data Source=db.db;Version=3;");
+                    m_dbConnection.DefaultTimeout = 5;
                     m_dbConnection.Open();
                 }
             }
@@ -45,7 +46,10 @@ namespace Kuchcik
 
         public static void DisonnectDB()
         {
-            //m_dbConnection.Close();
+            m_dbConnection.Close();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            m_dbConnection = null;
         }
     }
 }

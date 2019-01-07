@@ -32,7 +32,6 @@ namespace Kuchcik
             {
                 dataGridView1.Rows.Add(reader["id"], reader["name"], reader["unit"]);
             }
-            DatabaseControl.DisonnectDB();
         }
 
         private void addNewButton_Click(object sender, EventArgs e)
@@ -44,10 +43,10 @@ namespace Kuchcik
 
         private void updateData(object sender, FormClosedEventArgs e)
         {
-            this.Invoke(new Action(delegate ()
-            {
+            //this.Invoke(new Action(delegate ()
+            //{
                 fillDataGrid();
-            }));
+            //}));
         }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -74,8 +73,9 @@ namespace Kuchcik
                 SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
 
-                DatabaseControl.DisonnectDB();
-                DatabaseControl.ConnectDB();
+                sql = "DELETE FROM recipes WHERE ingredient_" + id + " <> 0.0";
+                command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+                command.ExecuteNonQuery();
 
                 string ColumnNames = "pragma table_info(recipes)";
                 command = new SQLiteCommand(ColumnNames, DatabaseControl.m_dbConnection);
@@ -98,9 +98,6 @@ namespace Kuchcik
                 sql += ")";
                 command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
-
-                DatabaseControl.DisonnectDB();
-                DatabaseControl.ConnectDB();
 
                 command = new SQLiteCommand(ColumnNames, DatabaseControl.m_dbConnection);
                 reader = command.ExecuteReader();
@@ -126,14 +123,9 @@ namespace Kuchcik
                 command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
 
-                DatabaseControl.DisonnectDB();
-                DatabaseControl.ConnectDB();
-
                 sql = "ALTER TABLE recipes_backup RENAME TO recipes";
                 command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
-
-                DatabaseControl.DisonnectDB();
 
                 fillDataGrid();
             }
