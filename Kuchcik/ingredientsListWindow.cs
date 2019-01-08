@@ -43,10 +43,7 @@ namespace Kuchcik
 
         private void updateData(object sender, FormClosedEventArgs e)
         {
-            //this.Invoke(new Action(delegate ()
-            //{
-                fillDataGrid();
-            //}));
+            fillDataGrid();
         }
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)

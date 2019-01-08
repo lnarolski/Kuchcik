@@ -44,6 +44,8 @@ namespace Kuchcik
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Time"].Value = reader["time"];
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Difficulty_level"].Value = reader["difficulty_level"];
             }
+
+            ((DataGridViewImageColumn)dataGridView1.Columns[2]).ImageLayout = DataGridViewImageCellLayout.Stretch;
         }
 
         private void addNewButton_Click(object sender, EventArgs e)
@@ -67,6 +69,25 @@ namespace Kuchcik
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void delButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Czy na pewno usunąć przepis?", "Usuń przepis", MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
+                string id = row[0].Cells["id"].Value.ToString();
+
+                DatabaseControl.ConnectDB();
+
+                string sql = "DELETE FROM recipes WHERE id = " + id.ToString();
+                SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+                command.ExecuteNonQuery();
+
+                fillDataGrid();
+            }
         }
     }
 }

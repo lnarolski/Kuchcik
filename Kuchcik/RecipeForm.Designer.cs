@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TitleBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.ImgBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.DifficultyLevelBox = new System.Windows.Forms.ComboBox();
+            this.DescriptionBox = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.TimeBox = new System.Windows.Forms.MaskedTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.identifier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IngridientName = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -58,12 +58,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Tytuł:";
             // 
-            // textBox1
+            // TitleBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(776, 20);
-            this.textBox1.TabIndex = 1;
+            this.TitleBox.Location = new System.Drawing.Point(12, 29);
+            this.TitleBox.Name = "TitleBox";
+            this.TitleBox.Size = new System.Drawing.Size(776, 20);
+            this.TitleBox.TabIndex = 1;
             // 
             // label2
             // 
@@ -74,12 +74,12 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Link do zdjęcia:";
             // 
-            // textBox2
+            // ImgBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(12, 68);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(776, 20);
-            this.textBox2.TabIndex = 3;
+            this.ImgBox.Location = new System.Drawing.Point(12, 68);
+            this.ImgBox.Name = "ImgBox";
+            this.ImgBox.Size = new System.Drawing.Size(776, 20);
+            this.ImgBox.TabIndex = 3;
             // 
             // label3
             // 
@@ -99,28 +99,29 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Czas przygotowania [min]:";
             // 
-            // comboBox1
+            // DifficultyLevelBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "0 - Łatwy",
+            this.DifficultyLevelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DifficultyLevelBox.FormattingEnabled = true;
+            this.DifficultyLevelBox.Items.AddRange(new object[] {
+            "0",
             "1",
             "2",
             "3",
             "4",
-            "5 - Trudny"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 147);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
+            "5"});
+            this.DifficultyLevelBox.Location = new System.Drawing.Point(12, 147);
+            this.DifficultyLevelBox.Name = "DifficultyLevelBox";
+            this.DifficultyLevelBox.Size = new System.Drawing.Size(121, 21);
+            this.DifficultyLevelBox.TabIndex = 7;
             // 
-            // richTextBox1
+            // DescriptionBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 187);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(388, 251);
-            this.richTextBox1.TabIndex = 8;
-            this.richTextBox1.Text = "";
+            this.DescriptionBox.Location = new System.Drawing.Point(12, 187);
+            this.DescriptionBox.Name = "DescriptionBox";
+            this.DescriptionBox.Size = new System.Drawing.Size(388, 251);
+            this.DescriptionBox.TabIndex = 8;
+            this.DescriptionBox.Text = "";
             // 
             // label5
             // 
@@ -140,13 +141,13 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "Składniki:";
             // 
-            // maskedTextBox1
+            // TimeBox
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(12, 107);
-            this.maskedTextBox1.Mask = "9999";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(776, 20);
-            this.maskedTextBox1.TabIndex = 11;
+            this.TimeBox.Location = new System.Drawing.Point(12, 107);
+            this.TimeBox.Mask = "9999";
+            this.TimeBox.Name = "TimeBox";
+            this.TimeBox.Size = new System.Drawing.Size(776, 20);
+            this.TimeBox.TabIndex = 11;
             // 
             // dataGridView1
             // 
@@ -160,9 +161,10 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(382, 251);
             this.dataGridView1.TabIndex = 12;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
+            this.dataGridView1.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
             // 
             // identifier
             // 
@@ -216,16 +218,16 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.acceptButton);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.TimeBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.DescriptionBox);
+            this.Controls.Add(this.DifficultyLevelBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.ImgBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TitleBox);
             this.Controls.Add(this.label1);
             this.Name = "RecipeForm";
             this.Text = "RecipeForm";
@@ -238,16 +240,16 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TitleBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox ImgBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ComboBox DifficultyLevelBox;
+        private System.Windows.Forms.RichTextBox DescriptionBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox TimeBox;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button acceptButton;
         private System.Windows.Forms.Button cancelButton;

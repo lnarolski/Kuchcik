@@ -19,6 +19,7 @@ namespace Kuchcik
                 m_dbConnection.Open();
                 string sql = "CREATE TABLE recipes (id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "title TEXT NOT NULL," +
+                    "description TEXT NOT NULL," +
                     "img TEXT," +
                     "time INTEGER NOT NULL," +
                     "difficulty_level INTEGER NOT NULL)";
