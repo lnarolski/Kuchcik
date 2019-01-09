@@ -61,6 +61,8 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(765, 330);
             this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEnter);
+            this.dataGridView1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellLeave);
             this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
             // 
             // id
@@ -122,6 +124,7 @@
             // 
             // delButton
             // 
+            this.delButton.Enabled = false;
             this.delButton.ForeColor = System.Drawing.Color.Red;
             this.delButton.Location = new System.Drawing.Point(572, 12);
             this.delButton.Name = "delButton";

@@ -48,12 +48,12 @@ namespace Kuchcik
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            delButton.Enabled = true;
+            //delButton.Enabled = true;
         }
 
         private void dataGridView1_RowLeave(object sender, DataGridViewCellEventArgs e)
         {
-            delButton.Enabled = false;
+            //delButton.Enabled = false;
         }
 
         private void delButton_Click(object sender, EventArgs e)
@@ -145,12 +145,15 @@ namespace Kuchcik
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
-            string id = row[0].Cells["id"].Value.ToString();
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
+                string id = row[0].Cells["id"].Value.ToString();
 
-            IngredientForm ingredientForm = new IngredientForm(Int32.Parse(id));
-            ingredientForm.FormClosed += new FormClosedEventHandler(updateData);
-            ingredientForm.ShowDialog();
+                IngredientForm ingredientForm = new IngredientForm(Int32.Parse(id));
+                ingredientForm.FormClosed += new FormClosedEventHandler(updateData);
+                ingredientForm.ShowDialog();
+            }
         }
     }
 }

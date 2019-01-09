@@ -61,6 +61,7 @@
             // 
             // ImgBox
             // 
+            this.ImgBox.Image = global::Kuchcik.Properties.Resources.uzaleznienie_od_jedzenia_aa349dfffb_4_cfea56d9d6cf66_8b7_a623f3_1_;
             this.ImgBox.Location = new System.Drawing.Point(424, 110);
             this.ImgBox.Name = "ImgBox";
             this.ImgBox.Size = new System.Drawing.Size(364, 240);

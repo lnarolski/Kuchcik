@@ -101,11 +101,24 @@ namespace Kuchcik
 
         private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
-            string id = row[0].Cells["id"].Value.ToString();
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
+                string id = row[0].Cells["id"].Value.ToString();
 
-            ViewRecipeWindow viewRecipeWindow = new ViewRecipeWindow(Int32.Parse(id));
-            viewRecipeWindow.ShowDialog();
+                ViewRecipeWindow viewRecipeWindow = new ViewRecipeWindow(Int32.Parse(id));
+                viewRecipeWindow.ShowDialog();
+            }
+        }
+
+        private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            delButton.Enabled = true;
+        }
+
+        private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            delButton.Enabled = false;
         }
     }
 }

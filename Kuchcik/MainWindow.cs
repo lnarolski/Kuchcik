@@ -145,11 +145,14 @@ namespace Kuchcik
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
-            string id = row[0].Cells["id"].Value.ToString();
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
+                string id = row[0].Cells["id"].Value.ToString();
 
-            ViewRecipeWindow viewRecipeWindow = new ViewRecipeWindow(Int32.Parse(id));
-            viewRecipeWindow.ShowDialog();
+                ViewRecipeWindow viewRecipeWindow = new ViewRecipeWindow(Int32.Parse(id));
+                viewRecipeWindow.ShowDialog();
+            }
         }
     }
 }

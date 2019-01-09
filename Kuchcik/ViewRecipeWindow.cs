@@ -79,13 +79,12 @@ namespace Kuchcik
                 System.Net.WebResponse response = request.GetResponse();
                 System.IO.Stream responseStream = response.GetResponseStream();
                 img = new Bitmap(responseStream);
+                ImgBox.Image = img;
             }
             catch (Exception ex)
             {
-                img = null;
+                //img = null;
             }
-
-            ImgBox.Image = img;
 
             DatabaseControl.DisonnectDB();
         }
