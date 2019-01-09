@@ -122,6 +122,7 @@
             // 
             // delButton
             // 
+            this.delButton.ForeColor = System.Drawing.Color.Red;
             this.delButton.Location = new System.Drawing.Point(572, 12);
             this.delButton.Name = "delButton";
             this.delButton.Size = new System.Drawing.Size(216, 90);

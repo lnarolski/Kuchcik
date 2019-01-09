@@ -103,6 +103,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(364, 168);
             this.dataGridView1.TabIndex = 7;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // Ingredient
             // 
@@ -133,6 +134,7 @@
             this.Controls.Add(this.ImgBox);
             this.Controls.Add(this.TimeLabel);
             this.Controls.Add(this.DifficultyLevelLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ViewRecipeWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Przepis";

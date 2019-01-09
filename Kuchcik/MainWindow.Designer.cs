@@ -62,6 +62,7 @@
             // 
             // runAlgorithmButton
             // 
+            this.runAlgorithmButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.runAlgorithmButton.Location = new System.Drawing.Point(636, 12);
             this.runAlgorithmButton.Name = "runAlgorithmButton";
             this.runAlgorithmButton.Size = new System.Drawing.Size(152, 90);

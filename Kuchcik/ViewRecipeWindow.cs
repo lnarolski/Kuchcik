@@ -24,10 +24,19 @@ namespace Kuchcik
             DatabaseControl.ConnectDB();
 
             IngredientsList = new Dictionary<string, Ingredient>();
-            DatabaseControl.ConnectDB();
-            string sql = "SELECT * FROM ingredients ORDER BY name ASC";
+
+            Dictionary<string, double> MyIngredientsList = new Dictionary<string, double>();
+            string sql = "SELECT * FROM my_ingredients";
             SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                MyIngredientsList.Add(reader["id"].ToString(), double.Parse(reader["Count"].ToString()));
+            }
+
+            sql = "SELECT * FROM ingredients ORDER BY name ASC";
+            command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+            reader = command.ExecuteReader();
             while (reader.Read())
             {
                 IngredientsList.Add(reader["id"].ToString(), new Ingredient(reader["id"].ToString(), reader["name"].ToString(), reader["unit"].ToString()));
@@ -51,6 +60,13 @@ namespace Kuchcik
                     Ingredient tempIngredient = IngredientsList[tempId];
 
                     dataGridView1.Rows.Add(tempIngredient.name, reader[i].ToString(), tempIngredient.unit);
+                    if (MyIngredientsList.ContainsKey(tempId))
+                    {
+                        if (double.Parse(reader[i].ToString()) > MyIngredientsList[tempId])
+                        {
+                            dataGridView1.Rows[dataGridView1.RowCount - 1].DefaultCellStyle.BackColor = Color.Red;
+                        }
+                    }
                 }
             }
 
@@ -59,7 +75,7 @@ namespace Kuchcik
             try
             {
                 System.Net.WebRequest request = System.Net.WebRequest.Create(reader["img"].ToString());
-                request.Timeout = 1000;
+                request.Timeout = 2000;
                 System.Net.WebResponse response = request.GetResponse();
                 System.IO.Stream responseStream = response.GetResponseStream();
                 img = new Bitmap(responseStream);
@@ -70,11 +86,18 @@ namespace Kuchcik
             }
 
             ImgBox.Image = img;
+
+            DatabaseControl.DisonnectDB();
         }
 
         private string ColumnNameToId(string ColumnName)
         {
             return ColumnName.Substring("ingredient_".Count());
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
         }
     }
 }

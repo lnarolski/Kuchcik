@@ -55,6 +55,8 @@ namespace Kuchcik
                 usedIngredientsList.Add(IngredientsListId[reader["id"].ToString()].name, IngredientsListId[reader["id"].ToString()]);
 
             }
+
+            DatabaseControl.DisonnectDB();
         }
         private void setCellComboBoxItems(DataGridView dataGrid, int rowIndex, int colIndex, Dictionary<string, Ingredient> itemsToAdd)
         {
@@ -179,6 +181,8 @@ namespace Kuchcik
                     command.ExecuteNonQuery();
                 }
             }
+
+            DatabaseControl.DisonnectDB();
 
             this.Close();
         }

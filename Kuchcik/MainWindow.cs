@@ -86,6 +86,7 @@ namespace Kuchcik
                             sql += " AND " + IngredientColumn + " = 0.0";
                         }
                     }
+                    sql += " ORDER BY title ASC";
                     command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                     reader = command.ExecuteReader();
 
@@ -117,9 +118,8 @@ namespace Kuchcik
                             dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Image"].Value = img;
                             dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Time"].Value = reader["time"];
                             dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Difficulty_level"].Value = reader["difficulty_level"];
-
-                            ((DataGridViewImageColumn)dataGridView1.Columns[2]).ImageLayout = DataGridViewImageCellLayout.Stretch;
                         }
+                        ((DataGridViewImageColumn)dataGridView1.Columns[2]).ImageLayout = DataGridViewImageCellLayout.Stretch;
                         dataGridView1.Refresh();
                     }
                     else

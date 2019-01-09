@@ -23,6 +23,7 @@ namespace Kuchcik
         private void fillDataGrid()
         {
             DatabaseControl.ConnectDB();
+
             string sql = "SELECT * FROM recipes ORDER BY title ASC";
             SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
@@ -55,6 +56,8 @@ namespace Kuchcik
             }
 
             ((DataGridViewImageColumn)dataGridView1.Columns[2]).ImageLayout = DataGridViewImageCellLayout.Stretch;
+
+            DatabaseControl.DisonnectDB();
         }
 
         private void addNewButton_Click(object sender, EventArgs e)
@@ -91,6 +94,8 @@ namespace Kuchcik
                 command.ExecuteNonQuery();
 
                 fillDataGrid();
+
+                DatabaseControl.DisonnectDB();
             }
         }
 
