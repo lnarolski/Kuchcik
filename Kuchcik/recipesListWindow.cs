@@ -30,7 +30,6 @@ namespace Kuchcik
             dataGridView1.Refresh();
             while (reader.Read())
             {
-                //dataGridView1.Rows.Add(reader["id"], reader["name"], reader["unit"]);
                 dataGridView1.Rows.Add();
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["id"].Value = reader["id"];
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Title"].Value = reader["title"];
@@ -40,6 +39,7 @@ namespace Kuchcik
                 try
                 {
                     System.Net.WebRequest request = System.Net.WebRequest.Create(reader["img"].ToString());
+                    request.Timeout = 500;
                     System.Net.WebResponse response = request.GetResponse();
                     System.IO.Stream responseStream = response.GetResponseStream();
                     img = new Bitmap(responseStream);
@@ -73,11 +73,6 @@ namespace Kuchcik
         {
             ingredientsListWindow ingredientsListWindow = new ingredientsListWindow();
             ingredientsListWindow.ShowDialog();
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void delButton_Click(object sender, EventArgs e)

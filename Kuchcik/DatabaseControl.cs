@@ -47,7 +47,10 @@ namespace Kuchcik
 
         public static void DisonnectDB()
         {
-            m_dbConnection.Close();
+            if (m_dbConnection != null)
+            {
+                m_dbConnection.Close();
+            }
             GC.Collect();
             GC.WaitForPendingFinalizers();
             m_dbConnection = null;

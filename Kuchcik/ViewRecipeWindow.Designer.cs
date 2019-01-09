@@ -134,7 +134,8 @@
             this.Controls.Add(this.TimeLabel);
             this.Controls.Add(this.DifficultyLevelLabel);
             this.Name = "ViewRecipeWindow";
-            this.Text = "ViewRecipeWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Przepis";
             ((System.ComponentModel.ISupportInitialize)(this.ImgBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

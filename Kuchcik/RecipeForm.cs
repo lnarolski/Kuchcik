@@ -36,6 +36,8 @@ namespace Kuchcik
         {
             InitializeComponent();
 
+            ImgBox.Text = "www.jakasstrona.pl/obrazek.jpg";
+            ImgBox.ForeColor = Color.Gray;
             DifficultyLevelBox.SelectedIndex = 0;
 
             IngredientsList = new Dictionary<string, Ingredient>();
@@ -46,7 +48,6 @@ namespace Kuchcik
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                //dataGridView1.Rows.Add(reader["id"], reader["name"], reader["unit"]);
                 IngredientsList.Add(reader["name"].ToString(), new Ingredient(reader["id"].ToString(), reader["name"].ToString(), reader["unit"].ToString()));
             }
 
@@ -102,7 +103,7 @@ namespace Kuchcik
                 SQLiteCommand command = new SQLiteCommand("INSERT INTO recipes (title, description, img, time, difficulty_level) VALUES (@title, @description, @img, @time, @difficulty_level)", DatabaseControl.m_dbConnection);
                 command.Parameters.AddWithValue("@title", TitleBox.Text);
                 command.Parameters.AddWithValue("@description", DescriptionBox.Text);
-                command.Parameters.AddWithValue("@img", ImgBox.Text);
+                command.Parameters.AddWithValue("@img", ImgBox.Text == "www.jakasstrona.pl/obrazek.jpg" ? "" : ImgBox.Text);
                 command.Parameters.AddWithValue("@time", TimeBox.Text);
                 command.Parameters.AddWithValue("@difficulty_level", DifficultyLevelBox.Text);
                 command.ExecuteNonQuery();
@@ -200,6 +201,24 @@ namespace Kuchcik
                 {
                     usedIngredientsList.Remove(TempRow.Cells[1].Value.ToString());
                 }
+            }
+        }
+
+        private void ImgBox_Leave(object sender, EventArgs e)
+        {
+            if (ImgBox.Text == "")
+            {
+                ImgBox.Text = "www.jakasstrona.pl/obrazek.jpg";
+                ImgBox.ForeColor = Color.Gray;
+            }
+        }
+
+        private void ImgBox_Enter(object sender, EventArgs e)
+        {
+            if (ImgBox.Text == "www.jakasstrona.pl/obrazek.jpg")
+            {
+                ImgBox.Text = "";
+                ImgBox.ForeColor = Color.Black;
             }
         }
     }

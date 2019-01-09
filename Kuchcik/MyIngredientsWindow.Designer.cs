@@ -110,8 +110,10 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.AcceptButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MyIngredientsWindow";
-            this.Text = "MyIngredientsWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Posiadane składniki";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

@@ -68,9 +68,14 @@
             this.runAlgorithmButton.TabIndex = 2;
             this.runAlgorithmButton.Text = "GENERUJ PRZEPISY";
             this.runAlgorithmButton.UseVisualStyleBackColor = true;
+            this.runAlgorithmButton.Click += new System.EventHandler(this.runAlgorithmButton_Click);
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -79,25 +84,37 @@
             this.Time,
             this.Difficulty_level});
             this.dataGridView1.Location = new System.Drawing.Point(23, 108);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowTemplate.Height = 100;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(765, 330);
             this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // id
             // 
             this.id.HeaderText = "id";
+            this.id.MinimumWidth = 99;
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Visible = false;
             // 
             // Title
             // 
+            this.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Title.HeaderText = "Tytuł";
+            this.Title.MinimumWidth = 100;
             this.Title.Name = "Title";
             this.Title.ReadOnly = true;
             // 
             // Image
             // 
+            this.Image.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Image.FillWeight = 1F;
             this.Image.HeaderText = "Zdjęcie";
+            this.Image.MinimumWidth = 100;
             this.Image.Name = "Image";
             this.Image.ReadOnly = true;
             // 
@@ -123,6 +140,7 @@
             this.Controls.Add(this.recipesListButton);
             this.Controls.Add(this.groceriesButton);
             this.Name = "MainWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Kuchcik";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

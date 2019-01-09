@@ -99,8 +99,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ingredientNameTextBox);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "IngredientForm";
-            this.Text = "newIngredientForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Składnik";
             this.ResumeLayout(false);
             this.PerformLayout();
 

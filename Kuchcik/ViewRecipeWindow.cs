@@ -59,6 +59,7 @@ namespace Kuchcik
             try
             {
                 System.Net.WebRequest request = System.Net.WebRequest.Create(reader["img"].ToString());
+                request.Timeout = 1000;
                 System.Net.WebResponse response = request.GetResponse();
                 System.IO.Stream responseStream = response.GetResponseStream();
                 img = new Bitmap(responseStream);

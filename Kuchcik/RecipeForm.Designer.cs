@@ -40,12 +40,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.TimeBox = new System.Windows.Forms.MaskedTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.acceptButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.identifier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IngridientName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.IngridientValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IngridentUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.acceptButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,10 +76,13 @@
             // 
             // ImgBox
             // 
+            this.ImgBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
             this.ImgBox.Location = new System.Drawing.Point(12, 68);
             this.ImgBox.Name = "ImgBox";
             this.ImgBox.Size = new System.Drawing.Size(776, 20);
             this.ImgBox.TabIndex = 2;
+            this.ImgBox.Enter += new System.EventHandler(this.ImgBox_Enter);
+            this.ImgBox.Leave += new System.EventHandler(this.ImgBox_Leave);
             // 
             // label3
             // 
@@ -165,26 +168,6 @@
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             this.dataGridView1.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
             // 
-            // acceptButton
-            // 
-            this.acceptButton.Location = new System.Drawing.Point(701, 444);
-            this.acceptButton.Name = "acceptButton";
-            this.acceptButton.Size = new System.Drawing.Size(87, 28);
-            this.acceptButton.TabIndex = 13;
-            this.acceptButton.Text = "OK";
-            this.acceptButton.UseVisualStyleBackColor = true;
-            this.acceptButton.Click += new System.EventHandler(this.acceptButton_Click);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(608, 444);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(87, 28);
-            this.cancelButton.TabIndex = 14;
-            this.cancelButton.Text = "Anuluj";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
             // identifier
             // 
             this.identifier.HeaderText = "Id";
@@ -210,6 +193,26 @@
             this.IngridentUnit.Name = "IngridentUnit";
             this.IngridentUnit.ReadOnly = true;
             // 
+            // acceptButton
+            // 
+            this.acceptButton.Location = new System.Drawing.Point(701, 444);
+            this.acceptButton.Name = "acceptButton";
+            this.acceptButton.Size = new System.Drawing.Size(87, 28);
+            this.acceptButton.TabIndex = 13;
+            this.acceptButton.Text = "OK";
+            this.acceptButton.UseVisualStyleBackColor = true;
+            this.acceptButton.Click += new System.EventHandler(this.acceptButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(608, 444);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(87, 28);
+            this.cancelButton.TabIndex = 14;
+            this.cancelButton.Text = "Anuluj";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // RecipeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,8 +232,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TitleBox);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "RecipeForm";
-            this.Text = "RecipeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Okno przepisu";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
