@@ -13,11 +13,19 @@ namespace Kuchcik
 {
     public partial class recipesListWindow : Form
     {
+        private bool edited;
         public recipesListWindow()
         {
             InitializeComponent();
 
             fillDataGrid();
+
+            edited = false;
+
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
         }
 
         private void fillDataGrid()
@@ -64,18 +72,30 @@ namespace Kuchcik
         {
             RecipeForm recipeForm = new RecipeForm();
             recipeForm.FormClosed += RecipeForm_FormClosed;
+            recipeForm.edited += value => edited = value;
             recipeForm.ShowDialog();
         }
 
         private void RecipeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            fillDataGrid();
+            if (edited)
+                fillDataGrid();
+            edited = false;
         }
 
         private void ingredientsButton_Click(object sender, EventArgs e)
         {
             ingredientsListWindow ingredientsListWindow = new ingredientsListWindow();
+            ingredientsListWindow.FormClosed += IngredientsListWindow_FormClosed;
+            ingredientsListWindow.editedRecipesWindow += value => edited = value;
             ingredientsListWindow.ShowDialog();
+        }
+
+        private void IngredientsListWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (edited)
+                fillDataGrid();
+            edited = false;
         }
 
         private void delButton_Click(object sender, EventArgs e)
@@ -87,15 +107,19 @@ namespace Kuchcik
                 DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
                 string id = row[0].Cells["id"].Value.ToString();
 
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
                 DatabaseControl.ConnectDB();
 
                 string sql = "DELETE FROM recipes WHERE id = " + id.ToString();
                 SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
 
-                fillDataGrid();
-
                 DatabaseControl.DisonnectDB();
+
+                //fillDataGrid();
+
+                dataGridView1.Rows.RemoveAt(dataGridView1.CurrentCell.RowIndex);
             }
         }
 

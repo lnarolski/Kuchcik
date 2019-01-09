@@ -13,11 +13,18 @@ namespace Kuchcik
 {
     public partial class ingredientsListWindow : Form
     {
+        public event Action<bool> editedRecipesWindow;
+        private bool edited;
         public ingredientsListWindow()
         {
             InitializeComponent();
 
             fillDataGrid();
+
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
         }
 
         private void fillDataGrid()
@@ -32,6 +39,7 @@ namespace Kuchcik
             {
                 dataGridView1.Rows.Add(reader["id"], reader["name"], reader["unit"]);
             }
+            DatabaseControl.DisonnectDB();
         }
 
         private void addNewButton_Click(object sender, EventArgs e)
@@ -44,16 +52,6 @@ namespace Kuchcik
         private void updateData(object sender, FormClosedEventArgs e)
         {
             fillDataGrid();
-        }
-
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            //delButton.Enabled = true;
-        }
-
-        private void dataGridView1_RowLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            //delButton.Enabled = false;
         }
 
         private void delButton_Click(object sender, EventArgs e)
@@ -129,7 +127,11 @@ namespace Kuchcik
                 command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
 
+                DatabaseControl.DisonnectDB();
+
                 fillDataGrid();
+
+                editedRecipesWindow(true);
             }
         }
 

@@ -19,6 +19,11 @@ namespace Kuchcik
         {
             InitializeComponent();
 
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
             this.id = id;
 
             DatabaseControl.ConnectDB();
@@ -66,6 +71,10 @@ namespace Kuchcik
                         {
                             dataGridView1.Rows[dataGridView1.RowCount - 1].DefaultCellStyle.BackColor = Color.Red;
                         }
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[dataGridView1.RowCount - 1].DefaultCellStyle.BackColor = Color.Red;
                     }
                 }
             }

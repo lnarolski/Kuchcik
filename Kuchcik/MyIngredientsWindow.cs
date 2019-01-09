@@ -23,6 +23,11 @@ namespace Kuchcik
         {
             InitializeComponent();
 
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
             IngredientsListName = new Dictionary<string, Ingredient>();
             IngredientsListId = new Dictionary<string, Ingredient>();
             usedIngredientsList = new Dictionary<string, Ingredient>();
@@ -159,6 +164,23 @@ namespace Kuchcik
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
+            bool isAllIngredientsFilled = true;
+            DataGridViewRow Row;
+            for (int i = 0; i < dataGridView1.RowCount - 1; ++i)
+            {
+                Row = dataGridView1.Rows[i];
+                if (Row.Cells[1].Value == null || Row.Cells[2].Value == null)
+                {
+                    isAllIngredientsFilled = false;
+                    break;
+                }
+            }
+            if (!isAllIngredientsFilled)
+            {
+                MessageBox.Show("UZUPEŁNIJ WSZYSTKIE WARTOŚCI DLA SKŁADNIKÓW!!!");
+                return;
+            }
+
             DatabaseControl.ConnectDB();
 
             SQLiteCommand command = new SQLiteCommand("DROP TABLE my_ingredients", DatabaseControl.m_dbConnection);
@@ -173,7 +195,7 @@ namespace Kuchcik
 
                 for (int i = 0; i < dataGridView1.RowCount - 1; ++i)
                 {
-                    DataGridViewRow Row = dataGridView1.Rows[i];
+                    Row = dataGridView1.Rows[i];
 
                     command = new SQLiteCommand("INSERT INTO my_ingredients (id, count) VALUES (@id, @count)", DatabaseControl.m_dbConnection);
                     command.Parameters.AddWithValue("@id", Row.Cells[0].Value.ToString());

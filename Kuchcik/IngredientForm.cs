@@ -33,6 +33,8 @@ namespace Kuchcik
 
                 ingredientNameTextBox.Text = ingredient_name;
                 ingredientUnitTextBox.Text = ingredient_unit;
+
+                DatabaseControl.DisonnectDB();
             }
         }
 
@@ -66,7 +68,10 @@ namespace Kuchcik
                 sql = "ALTER TABLE recipes ADD COLUMN ingredient_" + ingredient_id + " REAL DEFAULT 0.0";
                 command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
+
             }
+
+            DatabaseControl.DisonnectDB();
 
             this.Close();
         }

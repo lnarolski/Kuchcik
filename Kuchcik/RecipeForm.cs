@@ -28,6 +28,7 @@ namespace Kuchcik
     }
     public partial class RecipeForm : Form
     {
+        public event Action<bool> edited;
         private int id;
         Dictionary<string, Ingredient> IngredientsList;
         Dictionary<string, Ingredient> usedIngredientsList;
@@ -36,13 +37,20 @@ namespace Kuchcik
         {
             InitializeComponent();
 
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
             ImgBox.Text = "www.jakasstrona.pl/obrazek.jpg";
             ImgBox.ForeColor = Color.Gray;
             DifficultyLevelBox.SelectedIndex = 0;
 
             IngredientsList = new Dictionary<string, Ingredient>();
             usedIngredientsList = new Dictionary<string, Ingredient>();
+
             DatabaseControl.ConnectDB();
+
             string sql = "SELECT * FROM ingredients ORDER BY name ASC";
             SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
             SQLiteDataReader reader = command.ExecuteReader();
@@ -57,10 +65,13 @@ namespace Kuchcik
             {
 
             }
+            
+            DatabaseControl.DisonnectDB();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            edited(false);
             this.Close();
         }
 
@@ -90,13 +101,28 @@ namespace Kuchcik
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
+            bool isAllIngredientsFilled = true;
+            DataGridViewRow Row;
+            for (int i = 0; i < dataGridView1.RowCount - 1; ++i)
+            {
+                Row = dataGridView1.Rows[i];
+                if (Row.Cells[1].Value == null || Row.Cells[2].Value == null)
+                {
+                    isAllIngredientsFilled = false;
+                    break;
+                }
+            }
+            if (!isAllIngredientsFilled)
+            {
+                MessageBox.Show("UZUPEŁNIJ WSZYSTKIE WARTOŚCI DLA SKŁADNIKÓW!!!");
+                return;
+            }
+
             DatabaseControl.ConnectDB();
 
             if (id != -1)
             {
-                //string sql = "UPDATE recipes SET name = '" + ingredientNameTextBox.Text + "', unit = '" + ingredientUnitTextBox.Text + "' WHERE id = " + id;
-                //SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
-                //command.ExecuteNonQuery();
+                
             }
             else
             {
@@ -114,7 +140,7 @@ namespace Kuchcik
                 {
                     string sql = "UPDATE recipes SET ";
 
-                    DataGridViewRow Row = dataGridView1.Rows[0];
+                    Row = dataGridView1.Rows[0];
                     sql += "ingredient_" + Row.Cells[0].Value.ToString() + " = " + Row.Cells[2].Value.ToString();
 
                     for (int i = 1; i < dataGridView1.RowCount - 1; ++i)
@@ -128,7 +154,11 @@ namespace Kuchcik
                     command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                     command.ExecuteNonQuery();
                 }
+
+                edited(true);
             }
+
+            DatabaseControl.DisonnectDB();
 
             this.Close();
         }
@@ -168,6 +198,10 @@ namespace Kuchcik
                     dataGridView1.Rows[e.RowIndex].Cells[2].Value = 0;
                 }
                 
+            }
+            else
+            {
+                dataGridView1.Rows[e.RowIndex].Cells[2].Value = 0;
             }
 
             if (e.ColumnIndex == 1 && e.RowIndex >= 0)

@@ -14,17 +14,28 @@ namespace Kuchcik
 {
     public partial class MainWindow : Form
     {
+        recipesListWindow recipesListWindow;
         public MainWindow()
         {
             InitializeComponent();
 
+            recipesListButton = null;
+
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
+
+            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
         }
 
         private void recipesListButton_Click(object sender, EventArgs e)
         {
-            recipesListWindow recipesListWindow = new recipesListWindow();
+            if (recipesListWindow == null)
+            {
+                recipesListWindow = new recipesListWindow();
+            }
             recipesListWindow.ShowDialog();
         }
 
