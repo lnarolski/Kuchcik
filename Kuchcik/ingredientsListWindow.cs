@@ -83,9 +83,10 @@ namespace Kuchcik
                 SQLiteDataReader reader = command.ExecuteReader();
                 sql = "CREATE TABLE recipes_backup (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "title TEXT NOT NULL, " +
+                    "description TEXT NOT NULL," +
                     "img TEXT, " +
                     "time INTEGER NOT NULL, ";
-                for (int i = 0; i < 5; ++i)
+                for (int i = 0; i < 6; ++i)
                     reader.Read();
                 sql += reader["name"].ToString() + " INTEGER NOT NULL";
                 reader.Read();

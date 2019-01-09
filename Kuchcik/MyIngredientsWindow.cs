@@ -13,32 +13,18 @@ using System.Windows.Forms;
 
 namespace Kuchcik
 {
-    struct Ingredient
+    public partial class MyIngredientsWindow : Form
     {
-        public string id;
-        public string name;
-        public string unit;
-
-        public Ingredient(string id, string name, string unit)
-        {
-            this.id = id;
-            this.name = name;
-            this.unit = unit;
-        }
-    }
-    public partial class RecipeForm : Form
-    {
-        private int id;
-        Dictionary<string, Ingredient> IngredientsList;
+        Dictionary<string, Ingredient> IngredientsListName;
+        Dictionary<string, Ingredient> IngredientsListId;
         Dictionary<string, Ingredient> usedIngredientsList;
         private string TempIngredientName;
-        public RecipeForm(int id = -1)
+        public MyIngredientsWindow()
         {
             InitializeComponent();
 
-            DifficultyLevelBox.SelectedIndex = 0;
-
-            IngredientsList = new Dictionary<string, Ingredient>();
+            IngredientsListName = new Dictionary<string, Ingredient>();
+            IngredientsListId = new Dictionary<string, Ingredient>();
             usedIngredientsList = new Dictionary<string, Ingredient>();
             DatabaseControl.ConnectDB();
             string sql = "SELECT * FROM ingredients ORDER BY name ASC";
@@ -46,23 +32,30 @@ namespace Kuchcik
             SQLiteDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                //dataGridView1.Rows.Add(reader["id"], reader["name"], reader["unit"]);
-                IngredientsList.Add(reader["name"].ToString(), new Ingredient(reader["id"].ToString(), reader["name"].ToString(), reader["unit"].ToString()));
+                IngredientsListName.Add(reader["name"].ToString(), new Ingredient(reader["id"].ToString(), reader["name"].ToString(), reader["unit"].ToString()));
+                IngredientsListId.Add(reader["id"].ToString(), new Ingredient(reader["id"].ToString(), reader["name"].ToString(), reader["unit"].ToString()));
             }
-
-            this.id = id;
-
-            if (id != -1)
+            
+            sql = "SELECT * FROM my_ingredients";
+            command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+            reader = command.ExecuteReader();
+            dataGridView1.Rows.Clear();
+            dataGridView1.Refresh();
+            while (reader.Read())
             {
+                Debug.WriteLine("Liczba wierszy: " + dataGridView1.RowCount);
+
+
+                dataGridView1.Rows.Add(reader["id"], new DataGridViewComboBoxCell(), reader["count"], IngredientsListId[reader["id"].ToString()].unit);
+
+                DataGridViewComboBoxCell TempComboCell = (DataGridViewComboBoxCell)dataGridView1.Rows[dataGridView1.Rows.Count - 2].Cells["IngridientName"];
+                TempComboCell.Items.Add(IngredientsListId[reader["id"].ToString()].name);
+                TempComboCell.Value = IngredientsListId[reader["id"].ToString()].name;
+
+                usedIngredientsList.Add(IngredientsListId[reader["id"].ToString()].name, IngredientsListId[reader["id"].ToString()]);
 
             }
         }
-
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void setCellComboBoxItems(DataGridView dataGrid, int rowIndex, int colIndex, Dictionary<string, Ingredient> itemsToAdd)
         {
             if (rowIndex >= 0 && colIndex >= 0)
@@ -86,62 +79,21 @@ namespace Kuchcik
                 }
             }
         }
-
-        private void acceptButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
-            DatabaseControl.ConnectDB();
-
-            if (id != -1)
-            {
-                //string sql = "UPDATE recipes SET name = '" + ingredientNameTextBox.Text + "', unit = '" + ingredientUnitTextBox.Text + "' WHERE id = " + id;
-                //SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
-                //command.ExecuteNonQuery();
-            }
-            else
-            {
-                SQLiteCommand command = new SQLiteCommand("INSERT INTO recipes (title, description, img, time, difficulty_level) VALUES (@title, @description, @img, @time, @difficulty_level)", DatabaseControl.m_dbConnection);
-                command.Parameters.AddWithValue("@title", TitleBox.Text);
-                command.Parameters.AddWithValue("@description", DescriptionBox.Text);
-                command.Parameters.AddWithValue("@img", ImgBox.Text);
-                command.Parameters.AddWithValue("@time", TimeBox.Text);
-                command.Parameters.AddWithValue("@difficulty_level", DifficultyLevelBox.Text);
-                command.ExecuteNonQuery();
-
-                Debug.WriteLine("ID: " + DatabaseControl.m_dbConnection.LastInsertRowId);
-
-                if (dataGridView1.RowCount > 1)
-                {
-                    string sql = "UPDATE recipes SET ";
-
-                    DataGridViewRow Row = dataGridView1.Rows[0];
-                    sql += "ingredient_" + Row.Cells[0].Value.ToString() + " = " + Row.Cells[2].Value.ToString();
-
-                    for (int i = 1; i < dataGridView1.RowCount - 1; ++i)
-                    {
-                        Row = dataGridView1.Rows[i];
-                        sql += ", ingredient_" + Row.Cells[0].Value.ToString() + " = " + Row.Cells[2].Value.ToString();
-                    }
-
-                    sql += " WHERE id = " + DatabaseControl.m_dbConnection.LastInsertRowId;
-
-                    command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
-                    command.ExecuteNonQuery();
-                }
-            }
-
             this.Close();
         }
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            
+
         }
 
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             if (e.ColumnIndex == 1)
             {
-                setCellComboBoxItems(dataGridView1, e.RowIndex, e.ColumnIndex, IngredientsList);
+                setCellComboBoxItems(dataGridView1, e.RowIndex, e.ColumnIndex, IngredientsListName);
             }
 
             if (e.ColumnIndex == 1 && e.RowIndex >= 0)
@@ -166,7 +118,7 @@ namespace Kuchcik
                     MessageBox.Show(ex.ToString(), "Nieprawidłowa ilość", MessageBoxButtons.OK);
                     dataGridView1.Rows[e.RowIndex].Cells[2].Value = 0;
                 }
-                
+
             }
 
             if (e.ColumnIndex == 1 && e.RowIndex >= 0)
@@ -174,7 +126,7 @@ namespace Kuchcik
                 if (dataGridView1.Rows[e.RowIndex].Cells[1].Value != null)
                 {
                     string ingredientName = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                    Ingredient ingredient = IngredientsList[ingredientName];
+                    Ingredient ingredient = IngredientsListName[ingredientName];
 
                     dataGridView1.Rows[e.RowIndex].Cells[0].Value = ingredient.id;
                     dataGridView1.Rows[e.RowIndex].Cells[3].Value = ingredient.unit;
@@ -195,12 +147,40 @@ namespace Kuchcik
         {
             DataGridViewRow TempRow = e.Row;
             if (TempRow.Cells[1].Value != null)
-                {
+            {
                 if (usedIngredientsList.ContainsKey(TempRow.Cells[1].Value.ToString()))
                 {
                     usedIngredientsList.Remove(TempRow.Cells[1].Value.ToString());
                 }
             }
+        }
+
+        private void AcceptButton_Click(object sender, EventArgs e)
+        {
+            DatabaseControl.ConnectDB();
+
+            SQLiteCommand command = new SQLiteCommand("DROP TABLE my_ingredients", DatabaseControl.m_dbConnection);
+            command.ExecuteNonQuery();
+
+            command = new SQLiteCommand("CREATE TABLE my_ingredients (id INTEGER NOT NULL," +
+                    "count REAL DEFAULT 0.0)", DatabaseControl.m_dbConnection);
+            command.ExecuteNonQuery();
+
+            if (dataGridView1.RowCount > 1)
+            {
+
+                for (int i = 0; i < dataGridView1.RowCount - 1; ++i)
+                {
+                    DataGridViewRow Row = dataGridView1.Rows[i];
+
+                    command = new SQLiteCommand("INSERT INTO my_ingredients (id, count) VALUES (@id, @count)", DatabaseControl.m_dbConnection);
+                    command.Parameters.AddWithValue("@id", Row.Cells[0].Value.ToString());
+                    command.Parameters.AddWithValue("@count", Row.Cells[2].Value.ToString());
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            this.Close();
         }
     }
 }

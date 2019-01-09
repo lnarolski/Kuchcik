@@ -77,6 +77,12 @@
     <Compile Include="IngredientForm.Designer.cs">
       <DependentUpon>IngredientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyIngredientsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyIngredientsWindow.Designer.cs">
+      <DependentUpon>MyIngredientsWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="RecipeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,11 +103,20 @@
     <Compile Include="recipesListWindow.Designer.cs">
       <DependentUpon>recipesListWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewRecipeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewRecipeWindow.Designer.cs">
+      <DependentUpon>ViewRecipeWindow.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ingredientsListWindow.resx">
       <DependentUpon>ingredientsListWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IngredientForm.resx">
       <DependentUpon>IngredientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyIngredientsWindow.resx">
+      <DependentUpon>MyIngredientsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RecipeForm.resx">
       <DependentUpon>RecipeForm.cs</DependentUpon>
@@ -120,6 +135,9 @@
     </Compile>
     <EmbeddedResource Include="recipesListWindow.resx">
       <DependentUpon>recipesListWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewRecipeWindow.resx">
+      <DependentUpon>ViewRecipeWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

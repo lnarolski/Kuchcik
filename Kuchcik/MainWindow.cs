@@ -25,7 +25,8 @@ namespace Kuchcik
 
         private void groceriesButton_Click(object sender, EventArgs e)
         {
-
+            MyIngredientsWindow myIngredientsWindow = new MyIngredientsWindow();
+            myIngredientsWindow.ShowDialog();
         }
     }
 }

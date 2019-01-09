@@ -40,12 +40,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.TimeBox = new System.Windows.Forms.MaskedTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.acceptButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.identifier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IngridientName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.IngridientValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IngridentUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.acceptButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +79,7 @@
             this.ImgBox.Location = new System.Drawing.Point(12, 68);
             this.ImgBox.Name = "ImgBox";
             this.ImgBox.Size = new System.Drawing.Size(776, 20);
-            this.ImgBox.TabIndex = 3;
+            this.ImgBox.TabIndex = 2;
             // 
             // label3
             // 
@@ -104,7 +104,6 @@
             this.DifficultyLevelBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DifficultyLevelBox.FormattingEnabled = true;
             this.DifficultyLevelBox.Items.AddRange(new object[] {
-            "0",
             "1",
             "2",
             "3",
@@ -113,14 +112,14 @@
             this.DifficultyLevelBox.Location = new System.Drawing.Point(12, 147);
             this.DifficultyLevelBox.Name = "DifficultyLevelBox";
             this.DifficultyLevelBox.Size = new System.Drawing.Size(121, 21);
-            this.DifficultyLevelBox.TabIndex = 7;
+            this.DifficultyLevelBox.TabIndex = 4;
             // 
             // DescriptionBox
             // 
             this.DescriptionBox.Location = new System.Drawing.Point(12, 187);
             this.DescriptionBox.Name = "DescriptionBox";
             this.DescriptionBox.Size = new System.Drawing.Size(388, 251);
-            this.DescriptionBox.TabIndex = 8;
+            this.DescriptionBox.TabIndex = 5;
             this.DescriptionBox.Text = "";
             // 
             // label5
@@ -147,7 +146,7 @@
             this.TimeBox.Mask = "9999";
             this.TimeBox.Name = "TimeBox";
             this.TimeBox.Size = new System.Drawing.Size(776, 20);
-            this.TimeBox.TabIndex = 11;
+            this.TimeBox.TabIndex = 3;
             // 
             // dataGridView1
             // 
@@ -160,35 +159,11 @@
             this.dataGridView1.Location = new System.Drawing.Point(406, 187);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(382, 251);
-            this.dataGridView1.TabIndex = 12;
+            this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             this.dataGridView1.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
-            // 
-            // identifier
-            // 
-            this.identifier.HeaderText = "Id";
-            this.identifier.Name = "identifier";
-            this.identifier.Width = 50;
-            // 
-            // IngridientName
-            // 
-            this.IngridientName.HeaderText = "Składnik";
-            this.IngridientName.Name = "IngridientName";
-            this.IngridientName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.IngridientName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // IngridientValue
-            // 
-            this.IngridientValue.HeaderText = "Ilość";
-            this.IngridientValue.Name = "IngridientValue";
-            // 
-            // IngridentUnit
-            // 
-            this.IngridentUnit.HeaderText = "Jednostka";
-            this.IngridentUnit.Name = "IngridentUnit";
-            this.IngridentUnit.ReadOnly = true;
             // 
             // acceptButton
             // 
@@ -209,6 +184,31 @@
             this.cancelButton.Text = "Anuluj";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // identifier
+            // 
+            this.identifier.HeaderText = "Id";
+            this.identifier.Name = "identifier";
+            this.identifier.Visible = false;
+            this.identifier.Width = 50;
+            // 
+            // IngridientName
+            // 
+            this.IngridientName.HeaderText = "Składnik";
+            this.IngridientName.Name = "IngridientName";
+            this.IngridientName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IngridientName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // IngridientValue
+            // 
+            this.IngridientValue.HeaderText = "Ilość";
+            this.IngridientValue.Name = "IngridientValue";
+            // 
+            // IngridentUnit
+            // 
+            this.IngridentUnit.HeaderText = "Jednostka";
+            this.IngridentUnit.Name = "IngridentUnit";
+            this.IngridentUnit.ReadOnly = true;
             // 
             // RecipeForm
             // 

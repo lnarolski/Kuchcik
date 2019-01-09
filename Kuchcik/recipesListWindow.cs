@@ -35,10 +35,19 @@ namespace Kuchcik
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["id"].Value = reader["id"];
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Title"].Value = reader["title"];
 
-                System.Net.WebRequest request = System.Net.WebRequest.Create(reader["img"].ToString());
-                System.Net.WebResponse response = request.GetResponse();
-                System.IO.Stream responseStream = response.GetResponseStream();
-                Bitmap img = new Bitmap(responseStream);
+                Bitmap img;
+
+                try
+                {
+                    System.Net.WebRequest request = System.Net.WebRequest.Create(reader["img"].ToString());
+                    System.Net.WebResponse response = request.GetResponse();
+                    System.IO.Stream responseStream = response.GetResponseStream();
+                    img = new Bitmap(responseStream);
+                }
+                catch (Exception ex)
+                {
+                    img = null;
+                }
 
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Image"].Value = img;
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells["Time"].Value = reader["time"];
@@ -88,6 +97,15 @@ namespace Kuchcik
 
                 fillDataGrid();
             }
+        }
+
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
+            string id = row[0].Cells["id"].Value.ToString();
+
+            ViewRecipeWindow viewRecipeWindow = new ViewRecipeWindow(Int32.Parse(id));
+            viewRecipeWindow.ShowDialog();
         }
     }
 }
