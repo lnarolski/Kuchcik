@@ -68,13 +68,14 @@ namespace Kuchcik
                 string sql = "INSERT INTO ingredients (name, unit) VALUES ('" + ingredientNameTextBox.Text + "', '" + ingredientUnitTextBox.Text + "')";
                 SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
-                
-                sql = "SELECT id FROM ingredients WHERE name = '" + ingredientNameTextBox.Text + "'";
-                command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
-                SQLiteDataReader reader = command.ExecuteReader();
-                reader.Read();
-                string ingredient_id = reader["id"].ToString();
-                
+
+                //sql = "SELECT id FROM ingredients WHERE name = '" + ingredientNameTextBox.Text + "'";
+                //command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+                //SQLiteDataReader reader = command.ExecuteReader();
+                //reader.Read();
+                //string ingredient_id = reader["id"].ToString();
+                string ingredient_id = DatabaseControl.m_dbConnection.LastInsertRowId.ToString();
+
                 sql = "ALTER TABLE recipes ADD COLUMN ingredient_" + ingredient_id + " REAL DEFAULT 0.0";
                 command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
