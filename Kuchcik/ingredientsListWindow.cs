@@ -21,6 +21,8 @@ namespace Kuchcik
 
             fillDataGrid();
 
+            edited = false;
+
             foreach (DataGridViewColumn col in dataGridView1.Columns)
             {
                 col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -46,12 +48,15 @@ namespace Kuchcik
         {
             IngredientForm IngredientForm = new IngredientForm();
             IngredientForm.FormClosed += new FormClosedEventHandler(updateData);
+            IngredientForm.edited += value => edited = value;
             IngredientForm.ShowDialog();
         }
 
         private void updateData(object sender, FormClosedEventArgs e)
         {
-            fillDataGrid();
+            if (edited)
+                fillDataGrid();
+            edited = false;
         }
 
         private void delButton_Click(object sender, EventArgs e)
@@ -129,7 +134,9 @@ namespace Kuchcik
 
                 DatabaseControl.DisonnectDB();
 
-                fillDataGrid();
+                //fillDataGrid();
+
+                dataGridView1.Rows.RemoveAt(dataGridView1.CurrentCell.RowIndex);
 
                 editedRecipesWindow(true);
             }
@@ -154,6 +161,7 @@ namespace Kuchcik
 
                 IngredientForm ingredientForm = new IngredientForm(Int32.Parse(id));
                 ingredientForm.FormClosed += new FormClosedEventHandler(updateData);
+                ingredientForm.edited += value => edited = value;
                 ingredientForm.ShowDialog();
             }
         }

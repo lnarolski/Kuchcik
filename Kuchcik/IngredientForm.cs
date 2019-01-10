@@ -13,6 +13,7 @@ namespace Kuchcik
 {
     public partial class IngredientForm : Form
     {
+        public event Action<bool> edited;
         private int id;
         public IngredientForm(int id = -1)
         {
@@ -45,16 +46,25 @@ namespace Kuchcik
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
-            DatabaseControl.ConnectDB();
 
             if (id != -1)
             {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                DatabaseControl.ConnectDB();
+
                 string sql = "UPDATE ingredients SET name = '" + ingredientNameTextBox.Text + "', unit = '" + ingredientUnitTextBox.Text + "' WHERE id = " + id;
                 SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
+
+                DatabaseControl.DisonnectDB();
             }
             else
             {
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                DatabaseControl.ConnectDB();
+
                 string sql = "INSERT INTO ingredients (name, unit) VALUES ('" + ingredientNameTextBox.Text + "', '" + ingredientUnitTextBox.Text + "')";
                 SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
@@ -69,9 +79,11 @@ namespace Kuchcik
                 command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
                 command.ExecuteNonQuery();
 
+                DatabaseControl.DisonnectDB();
+
             }
 
-            DatabaseControl.DisonnectDB();
+            edited(true);
 
             this.Close();
         }
