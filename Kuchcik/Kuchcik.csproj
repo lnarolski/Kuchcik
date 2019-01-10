@@ -168,7 +168,6 @@
     <EmbeddedResource Include="ViewRecipeWindow.resx">
       <DependentUpon>ViewRecipeWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Kuchcik_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -23,6 +23,12 @@ namespace Kuchcik
         {
             InitializeComponent();
 
+            ToolTip toolTip1 = new ToolTip();
+            ToolTip toolTip2 = new ToolTip();
+
+            toolTip1.SetToolTip(this.addIngredientButton, "Dodaj wiersz do listy");
+            toolTip1.SetToolTip(this.delIngredientButton, "Usuń wiersz z listy");
+
             foreach (DataGridViewColumn col in dataGridView1.Columns)
             {
                 col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -207,6 +213,22 @@ namespace Kuchcik
             DatabaseControl.DisonnectDB();
 
             this.Close();
+        }
+
+        private void addIngredientButton_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Add();
+        }
+
+        private void delIngredientButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count != 0)
+            {
+                if (dataGridView1.CurrentCell.RowIndex >= 0 && dataGridView1.CurrentCell.RowIndex < dataGridView1.Rows.Count - 1)
+                {
+                    dataGridView1.Rows.RemoveAt(dataGridView1.CurrentCell.RowIndex);
+                }
+            }
         }
     }
 }

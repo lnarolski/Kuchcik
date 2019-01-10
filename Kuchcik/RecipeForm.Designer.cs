@@ -46,6 +46,9 @@
             this.IngridentUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.acceptButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.addIngredientButton = new System.Windows.Forms.Button();
+            this.delIngredientButton = new System.Windows.Forms.Button();
+            this.addNewIngredientButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -213,11 +216,47 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // addIngredientButton
+            // 
+            this.addIngredientButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.addIngredientButton.Location = new System.Drawing.Point(722, 154);
+            this.addIngredientButton.Name = "addIngredientButton";
+            this.addIngredientButton.Size = new System.Drawing.Size(30, 30);
+            this.addIngredientButton.TabIndex = 16;
+            this.addIngredientButton.Text = "+";
+            this.addIngredientButton.UseVisualStyleBackColor = true;
+            this.addIngredientButton.Click += new System.EventHandler(this.addIngredientButton_Click);
+            // 
+            // delIngredientButton
+            // 
+            this.delIngredientButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.delIngredientButton.Location = new System.Drawing.Point(758, 154);
+            this.delIngredientButton.Name = "delIngredientButton";
+            this.delIngredientButton.Size = new System.Drawing.Size(30, 30);
+            this.delIngredientButton.TabIndex = 17;
+            this.delIngredientButton.Text = "-";
+            this.delIngredientButton.UseVisualStyleBackColor = true;
+            this.delIngredientButton.Click += new System.EventHandler(this.delIngredientButton_Click);
+            // 
+            // addNewIngredientButton
+            // 
+            this.addNewIngredientButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.addNewIngredientButton.Location = new System.Drawing.Point(626, 154);
+            this.addNewIngredientButton.Name = "addNewIngredientButton";
+            this.addNewIngredientButton.Size = new System.Drawing.Size(90, 30);
+            this.addNewIngredientButton.TabIndex = 15;
+            this.addNewIngredientButton.Text = "Nowy składnik";
+            this.addNewIngredientButton.UseVisualStyleBackColor = true;
+            this.addNewIngredientButton.Click += new System.EventHandler(this.addNewIngredientButton_Click);
+            // 
             // RecipeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 484);
+            this.Controls.Add(this.addNewIngredientButton);
+            this.Controls.Add(this.delIngredientButton);
+            this.Controls.Add(this.addIngredientButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.acceptButton);
             this.Controls.Add(this.dataGridView1);
@@ -262,5 +301,8 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn IngridientName;
         private System.Windows.Forms.DataGridViewTextBoxColumn IngridientValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn IngridentUnit;
+        private System.Windows.Forms.Button addIngredientButton;
+        private System.Windows.Forms.Button delIngredientButton;
+        private System.Windows.Forms.Button addNewIngredientButton;
     }
 }

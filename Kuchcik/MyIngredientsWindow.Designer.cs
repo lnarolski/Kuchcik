@@ -35,12 +35,14 @@
             this.IngridientName = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.IngridientValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IngridentUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.delIngredientButton = new System.Windows.Forms.Button();
+            this.addIngredientButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // AcceptButton
             // 
-            this.AcceptButton.Location = new System.Drawing.Point(412, 428);
+            this.AcceptButton.Location = new System.Drawing.Point(411, 437);
             this.AcceptButton.Name = "AcceptButton";
             this.AcceptButton.Size = new System.Drawing.Size(75, 23);
             this.AcceptButton.TabIndex = 0;
@@ -50,7 +52,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(331, 428);
+            this.CancelButton.Location = new System.Drawing.Point(330, 437);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 1;
@@ -102,11 +104,35 @@
             this.IngridentUnit.Name = "IngridentUnit";
             this.IngridentUnit.ReadOnly = true;
             // 
+            // delIngredientButton
+            // 
+            this.delIngredientButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.delIngredientButton.Location = new System.Drawing.Point(47, 430);
+            this.delIngredientButton.Name = "delIngredientButton";
+            this.delIngredientButton.Size = new System.Drawing.Size(30, 30);
+            this.delIngredientButton.TabIndex = 19;
+            this.delIngredientButton.Text = "-";
+            this.delIngredientButton.UseVisualStyleBackColor = true;
+            this.delIngredientButton.Click += new System.EventHandler(this.delIngredientButton_Click);
+            // 
+            // addIngredientButton
+            // 
+            this.addIngredientButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.addIngredientButton.Location = new System.Drawing.Point(11, 430);
+            this.addIngredientButton.Name = "addIngredientButton";
+            this.addIngredientButton.Size = new System.Drawing.Size(30, 30);
+            this.addIngredientButton.TabIndex = 18;
+            this.addIngredientButton.Text = "+";
+            this.addIngredientButton.UseVisualStyleBackColor = true;
+            this.addIngredientButton.Click += new System.EventHandler(this.addIngredientButton_Click);
+            // 
             // MyIngredientsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 459);
+            this.ClientSize = new System.Drawing.Size(498, 472);
+            this.Controls.Add(this.delIngredientButton);
+            this.Controls.Add(this.addIngredientButton);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.AcceptButton);
@@ -128,5 +154,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn IngridientName;
         private System.Windows.Forms.DataGridViewTextBoxColumn IngridientValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn IngridentUnit;
+        private System.Windows.Forms.Button delIngredientButton;
+        private System.Windows.Forms.Button addIngredientButton;
     }
 }

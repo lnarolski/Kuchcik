@@ -33,9 +33,33 @@ namespace Kuchcik
         Dictionary<string, Ingredient> IngredientsList;
         Dictionary<string, Ingredient> usedIngredientsList;
         private string TempIngredientName;
+        private void createIngredientsList(Dictionary<string, Ingredient> keyValuePairs)
+        {
+            DatabaseControl.ConnectDB();
+
+            keyValuePairs.Clear();
+
+            string sql = "SELECT * FROM ingredients ORDER BY name ASC";
+            SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                keyValuePairs.Add(reader["name"].ToString(), new Ingredient(reader["id"].ToString(), reader["name"].ToString(), reader["unit"].ToString()));
+            }
+
+            DatabaseControl.DisonnectDB();
+        }
         public RecipeForm(int id = -1)
         {
             InitializeComponent();
+
+            ToolTip toolTip1 = new ToolTip();
+            ToolTip toolTip2 = new ToolTip();
+            ToolTip toolTip3 = new ToolTip();
+
+            toolTip1.SetToolTip(this.addIngredientButton, "Dodaj wiersz do listy");
+            toolTip1.SetToolTip(this.delIngredientButton, "Usuń wiersz z listy");
+            toolTip1.SetToolTip(this.addNewIngredientButton, "Dodaj nowy składnik");
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)
             {
@@ -49,15 +73,7 @@ namespace Kuchcik
             IngredientsList = new Dictionary<string, Ingredient>();
             usedIngredientsList = new Dictionary<string, Ingredient>();
 
-            DatabaseControl.ConnectDB();
-
-            string sql = "SELECT * FROM ingredients ORDER BY name ASC";
-            SQLiteCommand command = new SQLiteCommand(sql, DatabaseControl.m_dbConnection);
-            SQLiteDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                IngredientsList.Add(reader["name"].ToString(), new Ingredient(reader["id"].ToString(), reader["name"].ToString(), reader["unit"].ToString()));
-            }
+            createIngredientsList(IngredientsList);
 
             this.id = id;
 
@@ -65,8 +81,6 @@ namespace Kuchcik
             {
 
             }
-            
-            DatabaseControl.DisonnectDB();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -199,10 +213,6 @@ namespace Kuchcik
                 }
                 
             }
-            else
-            {
-                dataGridView1.Rows[e.RowIndex].Cells[2].Value = 0;
-            }
 
             if (e.ColumnIndex == 1 && e.RowIndex >= 0)
             {
@@ -254,6 +264,34 @@ namespace Kuchcik
                 ImgBox.Text = "";
                 ImgBox.ForeColor = Color.Black;
             }
+        }
+
+        private void addIngredientButton_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Add();
+        }
+
+        private void delIngredientButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count != 0)
+            {
+                if (dataGridView1.CurrentCell.RowIndex >= 0 && dataGridView1.CurrentCell.RowIndex < dataGridView1.Rows.Count - 1)
+                {
+                    dataGridView1.Rows.RemoveAt(dataGridView1.CurrentCell.RowIndex);
+                }
+            }
+        }
+
+        private void addNewIngredientButton_Click(object sender, EventArgs e)
+        {
+            IngredientForm ingredientForm = new IngredientForm();
+            ingredientForm.FormClosed += IngredientForm_FormClosed;
+            ingredientForm.ShowDialog();
+        }
+
+        private void IngredientForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            createIngredientsList(IngredientsList);
         }
     }
 }
