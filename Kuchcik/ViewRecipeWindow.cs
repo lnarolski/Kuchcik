@@ -70,11 +70,13 @@ namespace Kuchcik
                         if (double.Parse(reader[i].ToString()) > MyIngredientsList[tempId])
                         {
                             dataGridView1.Rows[dataGridView1.RowCount - 1].DefaultCellStyle.BackColor = Color.Red;
+                            dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["Count"].Value = reader[i].ToString() + " (-" + (double.Parse(reader[i].ToString()) - MyIngredientsList[tempId]).ToString() + ")";
                         }
                     }
                     else
                     {
                         dataGridView1.Rows[dataGridView1.RowCount - 1].DefaultCellStyle.BackColor = Color.Red;
+                        dataGridView1.Rows[dataGridView1.RowCount - 1].Cells["Count"].Value = reader[i].ToString() + " (-" + reader[i].ToString() + ")";
                     }
                 }
             }
