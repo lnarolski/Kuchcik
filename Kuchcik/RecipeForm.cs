@@ -33,6 +33,9 @@ namespace Kuchcik
         Dictionary<string, Ingredient> IngredientsList;
         Dictionary<string, Ingredient> usedIngredientsList;
         private string TempIngredientName;
+
+        public bool EditedIngredientForm { get; private set; }
+
         private void createIngredientsList(Dictionary<string, Ingredient> keyValuePairs)
         {
             DatabaseControl.ConnectDB();
@@ -286,6 +289,7 @@ namespace Kuchcik
         {
             IngredientForm ingredientForm = new IngredientForm();
             ingredientForm.FormClosed += IngredientForm_FormClosed;
+            ingredientForm.edited += value => EditedIngredientForm = value;
             ingredientForm.ShowDialog();
         }
 

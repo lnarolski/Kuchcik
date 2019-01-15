@@ -66,7 +66,9 @@ namespace Kuchcik
             {
                 DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
                 string id = row[0].Cells["id"].Value.ToString();
-                
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
                 DatabaseControl.ConnectDB();
 
                 string sql = "DELETE FROM ingredients WHERE id = " + id.ToString();
