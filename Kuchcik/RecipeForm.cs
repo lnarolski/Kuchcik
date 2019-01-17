@@ -158,12 +158,12 @@ namespace Kuchcik
                     string sql = "UPDATE recipes SET ";
 
                     Row = dataGridView1.Rows[0];
-                    sql += "ingredient_" + Row.Cells[0].Value.ToString() + " = " + Row.Cells[2].Value.ToString();
+                    sql += "ingredient_" + Row.Cells[0].Value.ToString() + " = " + Row.Cells[2].Value.ToString().Replace(',', '.');
 
                     for (int i = 1; i < dataGridView1.RowCount - 1; ++i)
                     {
                         Row = dataGridView1.Rows[i];
-                        sql += ", ingredient_" + Row.Cells[0].Value.ToString() + " = " + Row.Cells[2].Value.ToString();
+                        sql += ", ingredient_" + Row.Cells[0].Value.ToString() + " = " + Row.Cells[2].Value.ToString().Replace(',', '.');
                     }
 
                     sql += " WHERE id = " + DatabaseControl.m_dbConnection.LastInsertRowId;

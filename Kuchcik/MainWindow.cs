@@ -79,7 +79,7 @@ namespace Kuchcik
                     string IngredientColumn = reader["name"].ToString();
                     if (MyIngredientsList.ContainsKey(ColumnNameToId(IngredientColumn)))
                     {
-                        sql += IngredientColumn + " <= " + MyIngredientsList[ColumnNameToId(IngredientColumn)];
+                        sql += IngredientColumn + " <= " + MyIngredientsList[ColumnNameToId(IngredientColumn)].Replace(',', '.');
                     }
                     else
                     {
@@ -90,7 +90,7 @@ namespace Kuchcik
                         IngredientColumn = reader["name"].ToString();
                         if (MyIngredientsList.ContainsKey(ColumnNameToId(IngredientColumn)))
                         {
-                            sql += " AND " + IngredientColumn + " <= " + MyIngredientsList[ColumnNameToId(IngredientColumn)];
+                            sql += " AND " + IngredientColumn + " <= " + MyIngredientsList[ColumnNameToId(IngredientColumn)].Replace(',', '.');
                         }
                         else
                         {

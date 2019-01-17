@@ -205,7 +205,7 @@ namespace Kuchcik
 
                     command = new SQLiteCommand("INSERT INTO my_ingredients (id, count) VALUES (@id, @count)", DatabaseControl.m_dbConnection);
                     command.Parameters.AddWithValue("@id", Row.Cells[0].Value.ToString());
-                    command.Parameters.AddWithValue("@count", Row.Cells[2].Value.ToString());
+                    command.Parameters.AddWithValue("@count", Row.Cells[2].Value.ToString().Replace(',', '.'));
                     command.ExecuteNonQuery();
                 }
             }
