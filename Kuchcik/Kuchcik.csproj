@@ -93,17 +93,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseControl.cs" />
-    <Compile Include="ingredientsListWindow.cs">
+    <Compile Include="IngredientsListWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ingredientsListWindow.Designer.cs">
-      <DependentUpon>ingredientsListWindow.cs</DependentUpon>
+    <Compile Include="IngredientsListWindow.Designer.cs">
+      <DependentUpon>IngredientsListWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="IngredientForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IngredientForm.Designer.cs">
       <DependentUpon>IngredientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadingWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadingWindow.Designer.cs">
+      <DependentUpon>LoadingWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="MyIngredientsWindow.cs">
       <SubType>Form</SubType>
@@ -125,11 +131,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="recipesListWindow.cs">
+    <Compile Include="RecipesListWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="recipesListWindow.Designer.cs">
-      <DependentUpon>recipesListWindow.cs</DependentUpon>
+    <Compile Include="RecipesListWindow.Designer.cs">
+      <DependentUpon>RecipesListWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewRecipeWindow.cs">
       <SubType>Form</SubType>
@@ -137,11 +143,14 @@
     <Compile Include="ViewRecipeWindow.Designer.cs">
       <DependentUpon>ViewRecipeWindow.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ingredientsListWindow.resx">
-      <DependentUpon>ingredientsListWindow.cs</DependentUpon>
+    <EmbeddedResource Include="IngredientsListWindow.resx">
+      <DependentUpon>IngredientsListWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IngredientForm.resx">
       <DependentUpon>IngredientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadingWindow.resx">
+      <DependentUpon>LoadingWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyIngredientsWindow.resx">
       <DependentUpon>MyIngredientsWindow.cs</DependentUpon>
@@ -162,8 +171,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="recipesListWindow.resx">
-      <DependentUpon>recipesListWindow.cs</DependentUpon>
+    <EmbeddedResource Include="RecipesListWindow.resx">
+      <DependentUpon>RecipesListWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewRecipeWindow.resx">
       <DependentUpon>ViewRecipeWindow.cs</DependentUpon>

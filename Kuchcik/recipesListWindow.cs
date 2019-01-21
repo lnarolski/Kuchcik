@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace Kuchcik
 {
-    public partial class recipesListWindow : Form
+    public partial class RecipesListWindow : Form
     {
         private bool edited;
-        public recipesListWindow()
+        public RecipesListWindow()
         {
             InitializeComponent();
 
@@ -30,6 +30,13 @@ namespace Kuchcik
 
         private void fillDataGrid()
         {
+            this.Enabled = false;
+
+            LoadingWindow loadingWindow = new LoadingWindow();
+            loadingWindow.Show();
+
+            Application.DoEvents();
+
             DatabaseControl.ConnectDB();
 
             string sql = "SELECT * FROM recipes ORDER BY title ASC";
@@ -66,6 +73,9 @@ namespace Kuchcik
             ((DataGridViewImageColumn)dataGridView1.Columns[2]).ImageLayout = DataGridViewImageCellLayout.Stretch;
 
             DatabaseControl.DisonnectDB();
+
+            this.Enabled = true;
+            loadingWindow.Close();
         }
 
         private void addNewButton_Click(object sender, EventArgs e)
@@ -85,7 +95,7 @@ namespace Kuchcik
 
         private void ingredientsButton_Click(object sender, EventArgs e)
         {
-            ingredientsListWindow ingredientsListWindow = new ingredientsListWindow();
+            IngredientsListWindow ingredientsListWindow = new IngredientsListWindow();
             ingredientsListWindow.FormClosed += IngredientsListWindow_FormClosed;
             ingredientsListWindow.editedRecipesWindow += value => edited = value;
             ingredientsListWindow.ShowDialog();
@@ -117,8 +127,6 @@ namespace Kuchcik
 
                 DatabaseControl.DisonnectDB();
 
-                //fillDataGrid();
-
                 dataGridView1.Rows.RemoveAt(dataGridView1.CurrentCell.RowIndex);
             }
         }
@@ -143,6 +151,24 @@ namespace Kuchcik
         private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
             delButton.Enabled = false;
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
+                if (row.Count > 0)
+                {
+                    if (dataGridView1.CurrentCell.RowIndex >= 0 && dataGridView1.CurrentCell.RowIndex < dataGridView1.Rows.Count)
+                    {
+                        string id = row[0].Cells["id"].Value.ToString();
+
+                        ViewRecipeWindow viewRecipeWindow = new ViewRecipeWindow(Int32.Parse(id));
+                        viewRecipeWindow.ShowDialog();
+                    }
+                }
+            }
         }
     }
 }

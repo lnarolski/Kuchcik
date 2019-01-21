@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace Kuchcik
 {
-    public partial class ingredientsListWindow : Form
+    public partial class IngredientsListWindow : Form
     {
         public event Action<bool> editedRecipesWindow;
         private bool edited;
-        public ingredientsListWindow()
+        public IngredientsListWindow()
         {
             InitializeComponent();
 

@@ -1,6 +1,6 @@
 ﻿namespace Kuchcik
 {
-    partial class ingredientsListWindow
+    partial class IngredientsListWindow
     {
         /// <summary>
         /// Required designer variable.

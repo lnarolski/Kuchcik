@@ -14,7 +14,7 @@ namespace Kuchcik
 {
     public partial class MainWindow : Form
     {
-        recipesListWindow recipesListWindow;
+        RecipesListWindow recipesListWindow;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace Kuchcik
         {
             if (recipesListWindow == null)
             {
-                recipesListWindow = new recipesListWindow();
+                recipesListWindow = new RecipesListWindow();
             }
             recipesListWindow.ShowDialog();
         }
@@ -53,6 +53,13 @@ namespace Kuchcik
         private void runAlgorithmButton_Click(object sender, EventArgs e)
         {
             Dictionary<string, string> MyIngredientsList = new Dictionary<string, string>();
+
+            this.Enabled = false;
+
+            LoadingWindow loadingWindow = new LoadingWindow();
+            loadingWindow.Show();
+
+            Application.DoEvents();
 
             DatabaseControl.ConnectDB();
             string sql = "SELECT * FROM my_ingredients";
@@ -132,9 +139,15 @@ namespace Kuchcik
                         }
                         ((DataGridViewImageColumn)dataGridView1.Columns[2]).ImageLayout = DataGridViewImageCellLayout.Stretch;
                         dataGridView1.Refresh();
+
+                        this.Enabled = true;
+                        loadingWindow.Close();
                     }
                     else
                     {
+                        this.Enabled = true;
+                        loadingWindow.Close();
+                        dataGridView1.Rows.Clear();
                         MessageBox.Show("Nie znaleziono żadnych przepisów!", "Brak przepisów", MessageBoxButtons.OK);
                     }
                     
@@ -143,6 +156,10 @@ namespace Kuchcik
                 }
                 else
                 {
+                    this.Enabled = true;
+                    loadingWindow.Close();
+                    dataGridView1.Rows.Clear();
+                    this.Show();
                     MessageBox.Show("Nie znaleziono żadnych przepisów!", "Brak przepisów", MessageBoxButtons.OK);
                 }
             }
@@ -150,6 +167,9 @@ namespace Kuchcik
             {
                 DatabaseControl.DisonnectDB();
                 DatabaseControl.ConnectDB();
+                this.Enabled = true;
+                loadingWindow.Close();
+                dataGridView1.Rows.Clear();
                 MessageBox.Show("Nie posiadasz żadnych składników!", "Brak składników", MessageBoxButtons.OK);
             }
         }
@@ -163,6 +183,25 @@ namespace Kuchcik
 
                 ViewRecipeWindow viewRecipeWindow = new ViewRecipeWindow(Int32.Parse(id));
                 viewRecipeWindow.ShowDialog();
+            }
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataGridViewSelectedRowCollection rows = dataGridView1.SelectedRows;
+                if (rows.Count > 0)
+                {
+                    if (dataGridView1.CurrentCell.RowIndex >= 0 && dataGridView1.CurrentCell.RowIndex < dataGridView1.Rows.Count)
+                    {
+                        DataGridViewSelectedRowCollection row = dataGridView1.SelectedRows;
+                        string id = row[0].Cells["id"].Value.ToString();
+
+                        ViewRecipeWindow viewRecipeWindow = new ViewRecipeWindow(Int32.Parse(id));
+                        viewRecipeWindow.ShowDialog();
+                    }
+                }
             }
         }
     }
