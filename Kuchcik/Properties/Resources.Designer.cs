@@ -22,7 +22,7 @@ namespace Kuchcik.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Kuchcik.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kuchcik.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Kuchcik.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Kuchcik.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap uzaleznienie_od_jedzenia_aa349dfffb_4_cfea56d9d6cf66_8b7_a623f3_1_ {
+        public static System.Drawing.Bitmap uzaleznienie_od_jedzenia_aa349dfffb_4_cfea56d9d6cf66_8b7_a623f3_1_ {
             get {
                 object obj = ResourceManager.GetObject("uzaleznienie-od-jedzenia-aa349dfffb-4-cfea56d9d6cf66-8b7_a623f3[1]", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
