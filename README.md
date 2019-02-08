@@ -12,3 +12,5 @@ Aplikacja może nieprawidłowo działać (np. podczas dodawania przepisów lub m
 # TODO
 - Lepsza obsługa wyjątków wraz z informacją zwrotną dla użytkownika (KIEDYŚ)
 - Poprawienie sposobu na problemy z połączeniem z bazą (aktualnie jest resetowane połączenie i uruchamiany GC) (KIEDYŚ)
+
+# [Zrzuty ekranu](https://github.com/lnarolski/Kuchcik/tree/master/Kuchcik/Screenshots)
