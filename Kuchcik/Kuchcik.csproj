@@ -149,6 +149,12 @@
     <Compile Include="ViewRecipeWindow.Designer.cs">
       <DependentUpon>ViewRecipeWindow.cs</DependentUpon>
     </Compile>
+    <Content Include="Screenshots\screenshot1.png" />
+    <Content Include="Screenshots\screenshot2.png" />
+    <Content Include="Screenshots\screenshot3.png" />
+    <Content Include="Screenshots\screenshot4.png" />
+    <Content Include="Screenshots\screenshot5.png" />
+    <Content Include="Screenshots\screenshot6.png" />
     <EmbeddedResource Include="IngredientsListWindow.resx">
       <DependentUpon>IngredientsListWindow.cs</DependentUpon>
     </EmbeddedResource>
