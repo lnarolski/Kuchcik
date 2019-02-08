@@ -1,6 +1,7 @@
 # Kuchcik
 Projekt aplikacji generującej listy przepisów na podstawie posiadanych artykułów spożywczych przeznaczonej na system Windows.
-#![Screenshot](https://github.com/lnarolski/Kuchcik/blob/master/screenshot.png)
+
+# ![Screenshot](https://github.com/lnarolski/Kuchcik/blob/master/screenshot.png)
 
 # Działanie
 Zadaniem aplikacji jest tworzenie listy przepisów możliwych do wykonania na podstawie wiedzy o posiadanych składnikach. Plik bazy (db.db) musi znajdować się w tym samym katalogu co aplikacja. Gdy plik nie istnieje to tworzona jest nowa, pusta baza danych.
