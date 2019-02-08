@@ -14,6 +14,7 @@ namespace Kuchcik
     public partial class IngredientsListWindow : Form
     {
         public event Action<bool> editedRecipesWindow;
+        public event Action<bool> editedRecipesList;
         private bool edited;
         public IngredientsListWindow()
         {

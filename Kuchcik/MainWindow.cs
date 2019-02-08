@@ -15,6 +15,7 @@ namespace Kuchcik
     public partial class MainWindow : Form
     {
         RecipesListWindow recipesListWindow;
+        private bool recipesListEdited;
         public MainWindow()
         {
             InitializeComponent();
@@ -35,8 +36,19 @@ namespace Kuchcik
             if (recipesListWindow == null)
             {
                 recipesListWindow = new RecipesListWindow();
+                recipesListWindow.FormClosed += RecipesListWindow_FormClosed;
+                recipesListWindow.editedRecipesList += value => recipesListEdited = value;
             }
             recipesListWindow.ShowDialog();
+        }
+
+        private void RecipesListWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (recipesListEdited)
+            {
+                dataGridView1.Rows.Clear();
+                recipesListEdited = false;
+            }
         }
 
         private void groceriesButton_Click(object sender, EventArgs e)

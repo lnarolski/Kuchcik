@@ -14,6 +14,7 @@ namespace Kuchcik
     public partial class RecipesListWindow : Form
     {
         private bool edited;
+        public event Action<bool> editedRecipesList;
         public RecipesListWindow()
         {
             InitializeComponent();
@@ -128,6 +129,8 @@ namespace Kuchcik
                 DatabaseControl.DisonnectDB();
 
                 dataGridView1.Rows.RemoveAt(dataGridView1.CurrentCell.RowIndex);
+
+                editedRecipesList(true);
             }
         }
 
